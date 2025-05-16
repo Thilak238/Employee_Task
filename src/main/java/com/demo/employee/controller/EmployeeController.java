@@ -17,7 +17,8 @@ import com.demo.employee.entity.Employee;
 import com.demo.employee.service.EmployeeService;
 
 //Difference between @Controller and @RestController 
-
+//@Controller - returns a view template like HTML or JSP. @ResponseBody required for returning HTML or XML
+//@RestController - Automatically serializes the return value into JSON or XML
 @RestController
 @RequestMapping(value = "/employee")
 public class EmployeeController {
@@ -43,5 +44,30 @@ public class EmployeeController {
 			return employeeService.findByDesignationAndSalary();
 		}
 	}
-
+	
+	//Getting via JPA methods 
+	@GetMapping(value = "/fetchEmployeeBySalary")
+	public ResponseEntity<List<Employee>> findBySalary() {
+		return employeeService.findBySalary();
+	}
+	
+	//Find top Three Salary persons based on department
+	@GetMapping(value = "/fetchTopThreeSalaryPerson")
+	public ResponseEntity<List<Employee>> findTopThreeSalaryPerson() {
+		return employeeService.findTopThreeSalaryPerson();
+	}
+	
+	
+	
+	//{
+		//"EmployeePKId": {
+				//"employeeId":9,
+				//"employeeCode":"101_G"
+		//}
+		//		"firstName": "Harshith",
+		//      "lastName": "Rana",
+	    //      "isActive": true,
+		//      "designation": "software",
+		//      "salary": 91000.0
+	//}
 }

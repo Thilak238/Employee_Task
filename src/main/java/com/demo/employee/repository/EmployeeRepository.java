@@ -25,4 +25,10 @@ public interface EmployeeRepository extends JpaRepository<Employee, EmployeePKId
 		//Passing a param with Query Language
 		@Query(nativeQuery = true,value = "SELECT * FROM Employee WHERE is_active = true AND designation = :designation AND salary > :salary")
 		List<Employee> findByDesignationAndSalary(@Param("designation")String designation, @Param("salary")String salary);
+		
+		List<Employee> findBySalaryGreaterThanAndIsActiveAndDesignation(double salary,boolean isActive,String designation);
+		
+		//Native Query >> Limit it by 3
+		@Query(nativeQuery = true, value = "SELECT employee_id,employee_code,department,designation,first_name,last_name,is_active,salary,MAX(salary) FROM employee GROUP BY department,employee_code,employee_id LIMIT 3")
+		List<Employee> findTopThreeBasedDep();
 }

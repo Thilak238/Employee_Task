@@ -55,4 +55,22 @@ public class EmployeeService {
 		}
 		return new ResponseEntity<List<Employee>>(new ArrayList<Employee>(),HttpStatus.NOT_FOUND);
 	}
-}
+	
+	public ResponseEntity<List<Employee>> findBySalary() {
+		try {
+			return new ResponseEntity<List<Employee>>(employeeRepository.findBySalaryGreaterThanAndIsActiveAndDesignation(80000.00,true,"software"),HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<List<Employee>>(new ArrayList<Employee>(),HttpStatus.NOT_FOUND);
+	}
+	
+	public ResponseEntity<List<Employee>> findTopThreeSalaryPerson() {
+		try {
+			return new ResponseEntity<List<Employee>> (employeeRepository.findTopThreeBasedDep(),HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<List<Employee>> (new ArrayList<Employee>(),HttpStatus.NOT_FOUND);
+	}
+ }

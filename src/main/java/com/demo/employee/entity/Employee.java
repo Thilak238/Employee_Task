@@ -31,5 +31,5 @@ public class Employee {
 	private Boolean isActive;
 	private String designation;
 	private double salary;
-	
+	private String department;
 }
